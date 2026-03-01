@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Top App Bar -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+    <a href="/dashboard-proprietaire" class="flex size-12 shrink-0 items-center text-slate-800 dark:text-slate-200">
+        <span class="material-symbols-outlined">arrow_back_ios_new</span>
+    </a>
+    <h2
+        class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-800 dark:text-slate-200 pr-12">
+        Nouveau Contrat</h2>
+</div>
+
+<div class="p-4 space-y-6 pb-20">
+    <!-- Feedback Messages -->
+    <p id="contract-error" class="hidden text-sm text-red-500 bg-red-100 dark:bg-red-900/30 p-3 rounded-lg"></p>
+    <p id="contract-success" class="hidden text-sm text-green-500 bg-green-100 dark:bg-green-900/30 p-3 rounded-lg"></p>
+
+    <form id="create-contract-form" class="flex flex-col gap-4">
+        <!-- Property Selection -->
+        <label class="flex flex-col gap-1">
+            <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Sélectionner un bien</span>
+            <select id="propriete-select"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-14 placeholder:text-[#617589] dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                required>
+                <option value="" disabled selected>Chargement des biens...</option>
+            </select>
+        </label>
+
+        <!-- Tenant Selection -->
+        <label class="flex flex-col gap-1">
+            <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Sélectionner un locataire</span>
+            <select id="locataire-select"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-14 placeholder:text-[#617589] dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                required>
+                <option value="" disabled selected>Chargement des locataires...</option>
+            </select>
+        </label>
+
+        <!-- Rent Amount -->
+        <label class="flex flex-col gap-1">
+            <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Montant du loyer (€/mois)</span>
+            <input id="rent-amount" type="number" step="0.01"
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-14 placeholder:text-[#617589] dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                placeholder="ex: 850.00" required>
+        </label>
+
+        <!-- Dates -->
+        <div class="flex gap-4">
+            <label class="flex flex-col gap-1 flex-1">
+                <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Date de début</span>
+                <input id="start-date" type="date"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-14 placeholder:text-[#617589] dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    required>
+            </label>
+            <label class="flex flex-col gap-1 flex-1">
+                <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Date de fin</span>
+                <input id="end-date" type="date"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-14 placeholder:text-[#617589] dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    required>
+            </label>
+        </div>
+
+        <button id="submit-contract-btn" type="submit"
+            class="w-full mt-4 bg-primary text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-colors">
+            Créer le contrat
+        </button>
+    </form>
+
+    <div class="pt-8">
+        <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4">Contrats Existants</h3>
+        <div id="contrats-list" class="flex flex-col gap-3">
+            <p class="text-sm text-gray-500">Chargement des contrats...</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

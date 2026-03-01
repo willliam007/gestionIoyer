@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Messagerie/Communication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<div class="relative flex h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center bg-white dark:bg-background-dark p-3 sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
+<div class="flex w-12 items-center justify-start">
+<button class="flex items-center justify-center rounded-full h-10 w-10 text-gray-800 dark:text-white">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+</div>
+<div class="flex-1 flex items-center justify-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Portrait of John Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDH6xZBZixwRubj8hJigwHcLEBoEY03PfJv_AZMIntUZo87sgsFYRpbNwlq5O-YPpbjnVp2v7609dKI7UMT1dZy2cFQptKR6rH_tmIZ1430NknwZ4x7h4RAabZZmEXnXVnVfADPGDYB5xR6LveoWE1PuGAEvIdUnAL7bFwmNzWWQyatdJbgWEV_-loP76pnRsXF7kh6L4n2mhtz0CTIUtlEXU04K7P4uGCq8lvjhcZAKM7fkiKKIar-g6R6G-XzhBEiI8js2qAafPU");'></div>
+<div class="flex flex-col text-center">
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight">John Doe</h2>
+<p class="text-xs text-gray-500 dark:text-gray-400">Propriétaire</p>
+</div>
+</div>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-full h-10 w-10 text-gray-800 dark:text-white">
+<span class="material-symbols-outlined text-2xl">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Chat Messages -->
+<div class="flex-1 overflow-y-auto px-4 pt-4 pb-2 space-y-4">
+<!-- System Message -->
+<div class="flex justify-center">
+<div class="text-center my-2">
+<p class="text-xs text-gray-500 dark:text-gray-400 font-medium bg-gray-200/50 dark:bg-gray-700/50 rounded-full px-3 py-1">Aujourd'hui</p>
+</div>
+</div>
+<!-- Incoming Message -->
+<div class="flex items-end gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shrink-0" data-alt="Portrait of John Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABYICH2S3mb96IM7RdTFWBogLsN8AoEm5cqiApiA9CNY2pzKEtCnHUDeX_0QeaDjOM-05GeuWMShiJ8NDpzIs76iwMdPuv9GkqMGXFL4FkG7x6mQ8HPzAZrdkGVHE37kDHwsp_l1XH51KhWjoeR45LemNxQr3GcrR8GtIh9LHvDtcQMBP0YulXrt7oinDgEOxXTZ1gJyqFsXJcTshHJtIqlMJTci6JjJdTHCF6g_D8ZVSig7TOXMyvLGIkGpQ1D9LZzc2eUdg4WkY");'></div>
+<div class="flex flex-1 flex-col gap-1.5 items-start">
+<div class="text-base font-normal leading-normal flex max-w-xs rounded-lg rounded-bl-none px-4 py-2.5 bg-white dark:bg-background-dark text-gray-900 dark:text-white shadow-sm">
+            Bonjour, j'ai une question concernant le paiement du loyer ce mois-ci.
+          </div>
+<p class="text-gray-400 dark:text-gray-500 text-xs font-light">10:00</p>
+</div>
+</div>
+<!-- Outgoing Message -->
+<div class="flex items-end gap-3 justify-end">
+<div class="flex flex-1 flex-col gap-1.5 items-end">
+<div class="text-base font-normal leading-normal flex max-w-xs rounded-lg rounded-br-none px-4 py-2.5 bg-primary text-white">
+            Bonjour John, bien sûr. Quelle est votre question ?
+          </div>
+<div class="flex items-center gap-1.5">
+<p class="text-gray-400 dark:text-gray-500 text-xs font-light">10:01</p>
+<span class="material-symbols-outlined text-base text-primary">done_all</span>
+</div>
+</div>
+</div>
+<!-- Incoming Message with attachment -->
+<div class="flex items-end gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shrink-0" data-alt="Portrait of John Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAWfJMJ4m0LcronwWwT4Iv-pD7AcONqMmCQQlt1DizrE_hqBNnxkao1vTaffm46Wv2wfjrmzWlNR75GF1wpEOVlCJ56KSxLl6O9YQxne9lBIeUWJTndubZl7fRRAeGGkUEVgVQjJ6fv9lFvzjMj1J48sA6u9KAbs6eIrdTEnGkNWTJR7Tg7Iym09a1xlt5UyBVEzvXiz-4_yoJSZZ16CFYjgeHrh5DQvE6iEA6XGrMGVErooY1E3KzH5gSexaU74BEBrHesvGSBZ0s");'></div>
+<div class="flex flex-1 flex-col gap-1.5 items-start">
+<div class="text-base font-normal leading-normal flex max-w-xs rounded-lg rounded-bl-none px-4 py-2.5 bg-white dark:bg-background-dark text-gray-900 dark:text-white shadow-sm">
+                Je voulais juste confirmer que le virement a bien été effectué. Voici le reçu.
+            </div>
+<div class="flex items-center gap-2 p-3 rounded-lg rounded-bl-none bg-white dark:bg-background-dark shadow-sm cursor-pointer max-w-xs">
+<div class="flex items-center justify-center h-10 w-10 rounded-full bg-primary/20">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-medium text-gray-900 dark:text-white">recu_loyer_juin.pdf</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">128 KB</p>
+</div>
+</div>
+<p class="text-gray-400 dark:text-gray-500 text-xs font-light">10:05</p>
+</div>
+</div>
+<!-- System Message -->
+<div class="flex justify-center">
+<div class="text-center my-2">
+<p class="text-xs text-gray-500 dark:text-gray-400 font-medium bg-gray-200/50 dark:bg-gray-700/50 rounded-full px-3 py-1">Le paiement du loyer a été confirmé.</p>
+</div>
+</div>
+<!-- Outgoing Message -->
+<div class="flex items-end gap-3 justify-end">
+<div class="flex flex-1 flex-col gap-1.5 items-end">
+<div class="text-base font-normal leading-normal flex max-w-xs rounded-lg rounded-br-none px-4 py-2.5 bg-primary text-white">
+            Parfait, merci pour la confirmation ! Bonne journée.
+          </div>
+<div class="flex items-center gap-1.5">
+<p class="text-gray-400 dark:text-gray-500 text-xs font-light">10:08</p>
+<span class="material-symbols-outlined text-base text-primary/50">done_all</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Composer -->
+<div class="flex items-center px-3 py-3 gap-3 bg-white dark:bg-background-dark sticky bottom-0 border-t border-gray-200 dark:border-gray-800">
+<button class="flex items-center justify-center h-10 w-10 shrink-0 text-primary">
+<span class="material-symbols-outlined text-2xl">add_circle</span>
+</button>
+<label class="flex flex-col min-w-40 flex-1">
+<div class="flex w-full flex-1 items-stretch rounded-full h-10">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-gray-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-background-light dark:bg-gray-800 focus:border-none h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-4 text-base font-normal leading-normal" placeholder="Écrivez votre message..." value=""/>
+</div>
+</label>
+<button class="flex items-center justify-center h-10 w-10 shrink-0 text-primary">
+<span class="material-symbols-outlined text-2xl">send</span>
+</button>
+</div>
+</div>
+</body></html>

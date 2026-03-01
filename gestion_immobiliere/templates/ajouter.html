@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Top App Bar -->
+<header
+    class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 pb-3">
+    <h1 class="text-lg font-bold text-[#111418] dark:text-white flex-1 text-center leading-tight tracking-[-0.015em]">
+        Ajouter une Propriété</h1>
+    <a href="/dashboard-proprietaire" aria-label="Fermer"
+        class="absolute right-4 text-[#111418] dark:text-white flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+        <span class="material-symbols-outlined text-2xl">close</span>
+    </a>
+</header>
+<main class="flex-1">
+    <!-- Progress Indicator -->
+    <div class="px-4 pt-5 pb-2">
+        <div class="flex h-1.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+            <div class="h-1.5 w-1/3 rounded-full bg-primary"></div>
+        </div>
+        <div class="mt-2 flex justify-between text-xs font-medium text-gray-500 dark:text-gray-400">
+            <span class="text-primary dark:text-primary">Adresse</span>
+            <span>Détails</span>
+            <span>Photos</span>
+        </div>
+    </div>
+    <!-- Section 1: Adresse -->
+    <div class="flex flex-col gap-2 p-4">
+        <h2 class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] pt-4 pb-2">Adresse
+            de la propriété</h2>
+        <!-- Text Field: Rue et numéro -->
+        <div class="flex flex-col">
+            <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2" for="street">Rue et
+                numéro</label>
+            <input
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                id="street" placeholder="Ex: 123 Rue de Paris" type="text" value="" />
+        </div>
+        <!-- Text Field: Complément d'adresse -->
+        <div class="flex flex-col pt-3">
+            <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2"
+                for="address-2">Complément d'adresse (Optionnel)</label>
+            <input
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                id="address-2" placeholder="Ex: Appartement 5B" type="text" value="" />
+        </div>
+        <!-- Text Fields: Code postal & Ville -->
+        <div class="flex flex-wrap items-end gap-4 pt-3">
+            <div class="flex flex-col min-w-24 flex-1">
+                <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2"
+                    for="postal-code">Code postal</label>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    id="postal-code" placeholder="75001" type="text" />
+            </div>
+            <div class="flex flex-col min-w-40 flex-1">
+                <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2"
+                    for="city">Ville</label>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    id="city" placeholder="Paris" type="text" />
+            </div>
+        </div>
+        <!-- Picker: Pays -->
+        <div class="flex flex-col pt-3">
+            <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2"
+                for="country">Pays</label>
+            <div class="relative">
+                <select
+                    class="form-select w-full appearance-none rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 p-[15px] text-base font-normal leading-normal"
+                    id="country">
+                    <option>France</option>
+                    <option>Belgique</option>
+                    <option>Suisse</option>
+                    <option>Luxembourg</option>
+                </select>
+                <span
+                    class="material-symbols-outlined pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">expand_more</span>
+            </div>
+        </div>
+        <!-- Text Fields: Additional Details -->
+        <div class="flex flex-wrap items-end gap-4 pt-3">
+            <div class="flex flex-col min-w-24 flex-1">
+                <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2" for="prix">Loyer
+                    Mensuel (€)</label>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    id="prix" placeholder="Ex: 850" type="number" />
+            </div>
+            <div class="flex flex-col min-w-24 flex-1">
+                <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2"
+                    for="superficie">Surface (m²)</label>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    id="superficie" placeholder="Ex: 50" type="number" />
+            </div>
+            <div class="flex flex-col min-w-24 flex-1">
+                <label class="text-[#111418] dark:text-white text-base font-medium leading-normal pb-2"
+                    for="pieces">Pièces</label>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111418] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal"
+                    id="pieces" placeholder="Ex: 2" type="number" />
+            </div>
+        </div>
+    </div>
+    <!-- Existing Properties Section -->
+    <div class="flex flex-col gap-2 p-4 border-t border-gray-200 dark:border-gray-800 mt-4">
+        <h2 class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] pt-4 pb-2">Vos
+            biens enregistrés</h2>
+        <div id="properties-list" class="flex flex-col gap-3">
+            <!-- JavaScript will populate properties here -->
+            <p class="text-sm text-gray-500">Chargement...</p>
+        </div>
+    </div>
+</main>
+<!-- Footer with Primary Button -->
+<footer class="sticky bottom-0 bg-white dark:bg-black p-4 border-t border-gray-200 dark:border-gray-800">
+    <p id="add-error" class="text-red-500 text-sm mb-2 hidden"></p>
+    <p id="add-success" class="text-green-500 text-sm mb-2 hidden"></p>
+    <button id="add-property-btn"
+        class="w-full h-14 bg-primary text-white text-base font-bold rounded-xl flex items-center justify-center hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-black">Ajouter
+        ce bien</button>
+</footer>
+<!-- Bottom Navigation Bar -->
+<div
+    class="fixed bottom-0 left-0 right-0 z-20 border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+    <div class="mx-auto flex h-16 max-w-md items-center justify-around px-2">
+        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400"
+            href="/dashboard-proprietaire">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span class="text-xs font-semibold">Accueil</span>
+        </a>
+        <a class="flex flex-col items-center justify-center gap-1 text-primary" href="/ajouter-propriete">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">holiday_village</span>
+            <span class="text-xs font-medium">Biens</span>
+        </a>
+        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="/contrat">
+            <span class="material-symbols-outlined">groups</span>
+            <span class="text-xs font-medium">Locataires</span>
+        </a>
+        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="#"
+            id="logout-btn">
+            <span class="material-symbols-outlined">logout</span>
+            <span class="text-xs font-medium">Déconnexion</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
