@@ -47,6 +47,7 @@ class Propriete(db.Model):
     prix = db.Column(db.Float)
     image_url = db.Column(db.String(500))
     statut = db.Column(db.String(20), default='disponible')
+    statut_archive = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class Contrat(db.Model):

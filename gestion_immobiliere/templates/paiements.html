@@ -9,7 +9,12 @@
     </a>
     <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
         Historique des Paiements</h2>
-    <div class="flex w-12 items-center justify-end gap-2">
+    <div class="flex items-center justify-end gap-2 pr-2">
+        <a id="export-csv-btn"
+            class="hidden flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600 hover:bg-green-200"
+            title="Exporter CSV">
+            <span class="material-symbols-outlined">download</span>
+        </a>
         <!-- Button to show for tenants to declare payment -->
         <button id="show-declare-btn"
             class="hidden flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -65,36 +70,11 @@
         <span class="material-symbols-outlined text-[#111418] dark:text-white text-xl">expand_more</span>
     </button>
 </div>
+
 <!-- Payment List -->
 <div class="flex flex-col px-4 space-y-4 pb-24">
     <div id="payments-list" class="flex flex-col gap-3">
         <p class="text-sm text-center text-gray-500 mt-4">Chargement des paiements...</p>
-    </div>
-</div>
-<!-- Bottom Navigation Bar -->
-<div
-    class="fixed bottom-0 left-0 right-0 z-20 border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-    <div class="mx-auto flex h-16 max-w-md items-center justify-around px-2">
-        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="#"
-            id="nav-home">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="text-xs font-semibold">Accueil</span>
-        </a>
-        <a id="nav-biens" class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400"
-            href="/ajouter-propriete">
-            <span class="material-symbols-outlined">holiday_village</span>
-            <span class="text-xs font-medium">Biens</span>
-        </a>
-        <a id="nav-locataires" class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400"
-            href="/contrat">
-            <span class="material-symbols-outlined">groups</span>
-            <span class="text-xs font-medium">Locataires</span>
-        </a>
-        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="#"
-            id="logout-btn">
-            <span class="material-symbols-outlined">logout</span>
-            <span class="text-xs font-medium">Déconnexion</span>
-        </a>
     </div>
 </div>
 {% endblock %}

@@ -10,14 +10,12 @@
       <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
     </a>
   </div>
-  <div class="flex-1 flex items-center justify-center gap-3">
-    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Portrait of John Doe"
-      style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDH6xZBZixwRubj8hJigwHcLEBoEY03PfJv_AZMIntUZo87sgsFYRpbNwlq5O-YPpbjnVp2v7609dKI7UMT1dZy2cFQptKR6rH_tmIZ1430NknwZ4x7h4RAabZZmEXnXVnVfADPGDYB5xR6LveoWE1PuGAEvIdUnAL7bFwmNzWWQyatdJbgWEV_-loP76pnRsXF7kh6L4n2mhtz0CTIUtlEXU04K7P4uGCq8lvjhcZAKM7fkiKKIar-g6R6G-XzhBEiI8js2qAafPU");'>
-    </div>
-    <div class="flex flex-col text-center">
-      <h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight">John Doe</h2>
-      <p class="text-xs text-gray-500 dark:text-gray-400">Propriétaire</p>
-    </div>
+  <div class="flex-1 flex flex-col items-center justify-center">
+    <select id="contact-select"
+      class="bg-transparent border-none text-gray-900 dark:text-white text-lg font-bold text-center focus:ring-0 cursor-pointer p-0 m-0">
+      <option value="" disabled selected>Choisir un contact</option>
+    </select>
+    <p id="contact-role" class="text-[10px] text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">-</p>
   </div>
   <div class="flex w-12 items-center justify-end">
     <button class="flex items-center justify-center rounded-full h-10 w-10 text-gray-800 dark:text-white">

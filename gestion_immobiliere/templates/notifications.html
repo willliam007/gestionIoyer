@@ -2,127 +2,29 @@
 
 {% block content %}
 <!-- Top App Bar -->
-<div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
-<div class="flex size-12 shrink-0 items-center justify-start">
-<span class="material-symbols-outlined text-gray-800 dark:text-gray-200 text-2xl">arrow_back_ios_new</span>
+<div
+    class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800">
+    <div class="flex size-12 shrink-0 items-center justify-start">
+        <a href="javascript:history.back()"
+            class="flex size-10 items-center justify-center text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+            <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+        </a>
+    </div>
+    <h2 class="text-gray-900 dark:text-gray-50 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+        Notifications</h2>
+    <div class="flex w-12 items-center justify-end">
+        <button
+            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-gray-800 dark:text-gray-200 gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+            <span class="material-symbols-outlined text-2xl">settings</span>
+        </button>
+    </div>
 </div>
-<h2 class="text-gray-900 dark:text-gray-50 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Notifications</h2>
-<div class="flex w-12 items-center justify-end">
-<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-gray-800 dark:text-gray-200 gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
-<span class="material-symbols-outlined text-2xl">settings</span>
-</button>
-</div>
-</div>
-<!-- Segmented Buttons -->
-<div class="flex px-4 py-3 bg-background-light dark:bg-background-dark">
-<div class="flex h-10 flex-1 items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-800 p-1">
-<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-2 has-[:checked]:bg-primary has-[:checked]:shadow-md has-[:checked]:text-white text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal transition-colors duration-200">
-<span class="truncate">Toutes</span>
-<input checked="" class="invisible w-0" name="notification_filter" type="radio" value="Toutes"/>
-</label>
-<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-md px-2 has-[:checked]:bg-primary has-[:checked]:shadow-md has-[:checked]:text-white text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal transition-colors duration-200">
-<span class="truncate">Non lues</span>
-<input class="invisible w-0" name="notification_filter" type="radio" value="Non lues"/>
-</label>
-</div>
-</div>
-<div class="flex flex-col gap-px">
-<!-- Notification Group: Aujourd'hui -->
-<div class="px-4 pt-4 pb-2">
-<h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400">Aujourd'hui</h3>
-</div>
-<!-- List Item: Payment Reminder -->
-<div class="flex items-center gap-4 bg-white dark:bg-gray-900/50 px-4 min-h-[72px] py-3 justify-between">
-<div class="flex items-center gap-4 flex-1">
-<div class="text-primary flex items-center justify-center rounded-full bg-primary/10 shrink-0 size-10">
-<span class="material-symbols-outlined">notifications</span>
-</div>
-<div class="flex flex-col justify-center flex-1">
-<p class="text-gray-900 dark:text-gray-50 text-base font-semibold leading-normal line-clamp-1">Rappel de paiement</p>
-<p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Le loyer pour le mois de Juin est dû dans 3 jours.</p>
-</div>
-</div>
-<div class="flex items-center gap-3 shrink-0">
-<p class="text-gray-500 dark:text-gray-500 text-xs font-normal leading-normal">Il y a 2h</p>
-<div class="size-2.5 rounded-full bg-primary"></div>
-</div>
-</div>
-<!-- List Item: New Message -->
-<div class="flex items-center gap-4 bg-white dark:bg-gray-900/50 px-4 min-h-[72px] py-3 justify-between">
-<div class="flex items-center gap-4 flex-1">
-<div class="text-primary flex items-center justify-center rounded-full bg-primary/10 shrink-0 size-10">
-<span class="material-symbols-outlined">chat</span>
-</div>
-<div class="flex flex-col justify-center flex-1">
-<p class="text-gray-900 dark:text-gray-50 text-base font-semibold leading-normal line-clamp-1">Nouveau message</p>
-<p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Nouveau message de Jean Dupont.</p>
-</div>
-</div>
-<div class="flex items-center gap-3 shrink-0">
-<p class="text-gray-500 dark:text-gray-500 text-xs font-normal leading-normal">Il y a 5h</p>
-<div class="size-2.5 rounded-full bg-primary"></div>
-</div>
-</div>
-<!-- Notification Group: Hier -->
-<div class="px-4 pt-4 pb-2">
-<h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400">Hier</h3>
-</div>
-<!-- List Item: Rent Receipt -->
-<div class="flex items-center gap-4 bg-white dark:bg-gray-900/50 px-4 min-h-[72px] py-3 justify-between">
-<div class="flex items-center gap-4 flex-1">
-<div class="text-primary flex items-center justify-center rounded-full bg-primary/10 shrink-0 size-10">
-<span class="material-symbols-outlined">receipt_long</span>
-</div>
-<div class="flex flex-col justify-center flex-1">
-<p class="text-gray-900 dark:text-gray-50 text-base font-semibold leading-normal line-clamp-1">Quittance de loyer disponible</p>
-<p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Votre quittance de loyer pour Mai 2024 est disponible.</p>
-</div>
-</div>
-<div class="flex items-center gap-3 shrink-0">
-<p class="text-gray-500 dark:text-gray-500 text-xs font-normal leading-normal">Hier</p>
-</div>
-</div>
-<!-- List Item: Payment Confirmation -->
-<div class="flex items-center gap-4 bg-white dark:bg-gray-900/50 px-4 min-h-[72px] py-3 justify-between">
-<div class="flex items-center gap-4 flex-1">
-<div class="text-green-500 flex items-center justify-center rounded-full bg-green-500/10 shrink-0 size-10">
-<span class="material-symbols-outlined">task_alt</span>
-</div>
-<div class="flex flex-col justify-center flex-1">
-<p class="text-gray-900 dark:text-gray-50 text-base font-semibold leading-normal line-clamp-1">Paiement reçu</p>
-<p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Paiement de 850€ reçu avec succès.</p>
-</div>
-</div>
-<div class="flex items-center gap-3 shrink-0">
-<p class="text-gray-500 dark:text-gray-500 text-xs font-normal leading-normal">Hier</p>
-</div>
-</div>
-<!-- Notification Group: Cette semaine -->
-<div class="px-4 pt-4 pb-2">
-<h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400">Cette semaine</h3>
-</div>
-<!-- List Item: Contract Alert -->
-<div class="flex items-center gap-4 bg-white dark:bg-gray-900/50 px-4 min-h-[72px] py-3 justify-between">
-<div class="flex items-center gap-4 flex-1">
-<div class="text-orange-500 flex items-center justify-center rounded-full bg-orange-500/10 shrink-0 size-10">
-<span class="material-symbols-outlined">contract</span>
-</div>
-<div class="flex flex-col justify-center flex-1">
-<p class="text-gray-900 dark:text-gray-50 text-base font-semibold leading-normal line-clamp-1">Échéance du contrat</p>
-<p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Votre contrat de location arrive à échéance dans 30 jours.</p>
-</div>
-</div>
-<div class="flex items-center gap-3 shrink-0">
-<p class="text-gray-500 dark:text-gray-500 text-xs font-normal leading-normal">24/06</p>
-</div>
-</div>
-</div>
-<!-- Empty State -->
-<div class="flex flex-col items-center justify-center text-center p-8 mt-12 hidden">
-<div class="flex items-center justify-center size-24 bg-gray-200 dark:bg-gray-800 rounded-full mb-6">
-<span class="material-symbols-outlined text-4xl text-gray-500 dark:text-gray-400">notifications_off</span>
-</div>
-<h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Aucune notification</h3>
-<p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Vous n'avez aucune nouvelle notification pour le moment.</p>
+
+<!-- Dynamic Notifications Container -->
+<div id="notifications-list" class="flex flex-col gap-px">
+    <div class="flex flex-col items-center justify-center text-center p-12 mt-8">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <p class="text-sm text-gray-500 mt-4 italic">Chargement des notifications...</p>
+    </div>
 </div>
 {% endblock %}

@@ -13,11 +13,11 @@
                 </div>
             </div>
             <div class="flex items-center justify-end">
-                <button
+                <a href="/ajouter-propriete"
                     class="flex items-center gap-1 rounded-lg bg-primary/10 dark:bg-primary/20 px-3 py-2 text-primary dark:text-white text-sm font-bold">
                     <span class="material-symbols-outlined text-base">add</span>
                     Ajouter
-                </button>
+                </a>
             </div>
         </div>
         <p class="text-2xl font-bold leading-tight tracking-tight text-[#111418] dark:text-gray-100" id="owner-name">
@@ -54,149 +54,17 @@
     <div class="px-4">
         <h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] text-[#111418] dark:text-gray-100 pt-3 pb-3">
             Prochains loyers à percevoir</h2>
-        <div class="flex flex-col gap-2">
-            <!-- List Item 1 -->
-            <div class="flex min-h-[72px] items-center justify-between gap-4 rounded-xl bg-white dark:bg-gray-800 p-3">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-white">
-                        <span class="material-symbols-outlined">house</span>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <p class="text-base font-medium leading-normal text-[#111418] dark:text-gray-100 line-clamp-1">
-                            24 Rue de la Paix</p>
-                        <p class="text-sm font-normal leading-normal text-[#617589] dark:text-gray-400 line-clamp-2">
-                            Locataire: J. Dupont</p>
-                    </div>
-                </div>
-                <div class="shrink-0 text-right">
-                    <p class="text-base font-semibold leading-normal text-[#111418] dark:text-gray-100">850€</p>
-                    <p class="text-xs text-[#617589] dark:text-gray-400">Échéance le 5 Juil.</p>
-                </div>
-            </div>
-            <!-- List Item 2 -->
-            <div class="flex min-h-[72px] items-center justify-between gap-4 rounded-xl bg-white dark:bg-gray-800 p-3">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-white">
-                        <span class="material-symbols-outlined">apartment</span>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <p class="text-base font-medium leading-normal text-[#111418] dark:text-gray-100 line-clamp-1">
-                            15 Av. des Champs-Élysées</p>
-                        <p class="text-sm font-normal leading-normal text-[#617589] dark:text-gray-400 line-clamp-2">
-                            Locataire: A. Martin</p>
-                    </div>
-                </div>
-                <div class="shrink-0 text-right">
-                    <p class="text-base font-semibold leading-normal text-[#111418] dark:text-gray-100">1200€</p>
-                    <p class="text-xs text-[#617589] dark:text-gray-400">Échéance le 5 Juil.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Recent Activity Section -->
-    <div class="px-4">
-        <h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] text-[#111418] dark:text-gray-100 pt-6 pb-3">
-            Activité récente</h2>
-        <div class="flex flex-col gap-2">
-            <!-- Activity Item 1 -->
-            <div class="flex min-h-[72px] items-center justify-between gap-4 rounded-xl bg-white dark:bg-gray-800 p-3">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400">
-                        <span class="material-symbols-outlined">payments</span>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <p class="text-base font-medium leading-normal text-[#111418] dark:text-gray-100 line-clamp-1">
-                            Paiement reçu</p>
-                        <p class="text-sm font-normal leading-normal text-[#617589] dark:text-gray-400 line-clamp-2">24
-                            Rue de la Paix</p>
-                    </div>
-                </div>
-                <div class="shrink-0 text-right">
-                    <p class="text-base font-semibold leading-normal text-green-600 dark:text-green-400">+ 850€</p>
-                    <p class="text-xs text-[#617589] dark:text-gray-400">1 Juil.</p>
-                </div>
-            </div>
-            <!-- Activity Item 2 -->
-            <div class="flex min-h-[72px] items-center justify-between gap-4 rounded-xl bg-white dark:bg-gray-800 p-3">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400">
-                        <span class="material-symbols-outlined">receipt_long</span>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <p class="text-base font-medium leading-normal text-[#111418] dark:text-gray-100 line-clamp-1">
-                            Nouveau contrat signé</p>
-                        <p class="text-sm font-normal leading-normal text-[#617589] dark:text-gray-400 line-clamp-2">7
-                            Rue de Rivoli</p>
-                    </div>
-                </div>
-                <div class="shrink-0 text-right">
-                    <p class="text-xs text-[#617589] dark:text-gray-400">30 Juin</p>
-                </div>
-            </div>
+        <div class="flex flex-col gap-2" id="owner-upcoming-rents">
+            <p class="text-sm text-gray-500 italic p-4 text-center">Chargement des loyers...</p>
         </div>
     </div>
     <!-- Important Alerts Section -->
-    <div class="px-4">
+    <div class="px-4 pb-4">
         <h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] text-[#111418] dark:text-gray-100 pt-6 pb-3">
             Alertes importantes</h2>
-        <div class="flex flex-col gap-2">
-            <!-- Alert Item 1 -->
-            <div
-                class="flex min-h-[72px] items-center gap-4 rounded-xl bg-red-50 dark:bg-red-900/30 p-3 border border-red-200 dark:border-red-900/50">
-                <div
-                    class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400">
-                    <span class="material-symbols-outlined">warning</span>
-                </div>
-                <div class="flex flex-col justify-center">
-                    <p class="text-base font-medium leading-normal text-red-800 dark:text-red-200 line-clamp-1">Paiement
-                        en retard</p>
-                    <p class="text-sm font-normal leading-normal text-red-600 dark:text-red-300 line-clamp-2">56 Bd
-                        Haussmann - M. Durand</p>
-                </div>
-            </div>
-            <!-- Alert Item 2 -->
-            <div
-                class="flex min-h-[72px] items-center gap-4 rounded-xl bg-yellow-50 dark:bg-yellow-900/30 p-3 border border-yellow-200 dark:border-yellow-900/50">
-                <div
-                    class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-400">
-                    <span class="material-symbols-outlined">event_repeat</span>
-                </div>
-                <div class="flex flex-col justify-center">
-                    <p class="text-base font-medium leading-normal text-yellow-800 dark:text-yellow-200 line-clamp-1">
-                        Contrat arrivant à expiration</p>
-                    <p class="text-sm font-normal leading-normal text-yellow-600 dark:text-yellow-300 line-clamp-2">101
-                        Rue de Rennes - Expire le 31 Août</p>
-                </div>
-            </div>
+        <div class="flex flex-col gap-2" id="owner-alerts-list">
+            <p class="text-sm text-gray-500 italic p-4 text-center">Recherche d'alertes...</p>
         </div>
-    </div>
-</div>
-<!-- Bottom Navigation Bar -->
-<div
-    class="fixed bottom-0 left-0 right-0 z-20 border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-    <div class="mx-auto flex h-16 max-w-md items-center justify-around px-2">
-        <a class="flex flex-col items-center justify-center gap-1 text-primary" href="/dashboard-proprietaire">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-            <span class="text-xs font-semibold">Accueil</span>
-        </a>
-        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400"
-            href="/ajouter-propriete">
-            <span class="material-symbols-outlined">holiday_village</span>
-            <span class="text-xs font-medium">Biens</span>
-        </a>
-        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="/contrat">
-            <span class="material-symbols-outlined">groups</span>
-            <span class="text-xs font-medium">Locataires</span>
-        </a>
-        <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="#"
-            id="logout-btn">
-            <span class="material-symbols-outlined">logout</span>
-            <span class="text-xs font-medium">Déconnexion</span>
-        </a>
     </div>
 </div>
 {% endblock %}

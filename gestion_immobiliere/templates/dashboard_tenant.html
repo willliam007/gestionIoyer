@@ -31,18 +31,18 @@
             <div class="flex w-full grow flex-col items-stretch justify-center gap-2 p-4">
                 <div class="flex justify-between items-center">
                     <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Prochain Loyer</p>
-                    <div
-                        class="px-2 py-0.5 rounded-full bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400 text-xs font-medium">
-                        À Payer</div>
+                    <div id="tenant-payment-badge"
+                        class="flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300">
+                        ⚠️ À Payer</div>
                 </div>
                 <p class="text-[#111418] dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]"
-                    id="tenant-next-rent">€0.00</p>
+                    id="tenant-next-rent">Chargement...</p>
                 <div class="flex items-end gap-3 justify-between mt-2">
                     <div class="flex flex-col gap-0.5">
-                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">À payer avant le
-                            5 juillet 2024</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal"
+                            id="rent-due-date">Prochaine échéance : --/--/----</p>
                     </div>
-                    <button
+                    <button id="pay-now-btn"
                         class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-white text-sm font-medium leading-normal shadow-sm hover:bg-primary/90 active:scale-95 transition-transform duration-100">
                         <span class="truncate">Payer Maintenant</span>
                     </button>
@@ -55,7 +55,8 @@
     <!-- Navigation List Items -->
     <div class="flex flex-col gap-2">
         <!-- Historique des Paiements -->
-        <div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl justify-between shadow-sm">
+        <a href="/paiements"
+            class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl justify-between shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition">
             <div class="flex items-center gap-4">
                 <div
                     class="text-gray-700 dark:text-gray-300 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700 shrink-0 size-12">
@@ -64,14 +65,14 @@
                 <div class="flex flex-col justify-center">
                     <p class="text-[#111418] dark:text-white text-base font-medium leading-normal line-clamp-1">
                         Historique des Paiements</p>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Dernier
-                        paiement le 5 juin</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Voir
+                        tous les paiements</p>
                 </div>
             </div>
             <div class="shrink-0">
                 <span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
             </div>
-        </div>
+        </a>
         <!-- Mon Contrat -->
         <a href="/contrat"
             class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl justify-between shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition">
@@ -113,7 +114,8 @@
             </div>
         </a>
         <!-- Demande d'intervention -->
-        <div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl justify-between shadow-sm">
+        <div id="intervention-btn"
+            class="flex items-center gap-4 bg-white dark:bg-gray-800 p-3 rounded-xl justify-between shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition">
             <div class="flex items-center gap-4">
                 <div
                     class="text-gray-700 dark:text-gray-300 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700 shrink-0 size-12">
@@ -129,6 +131,32 @@
             <div class="shrink-0">
                 <span class="material-symbols-outlined text-gray-400 dark:text-gray-500">chevron_right</span>
             </div>
+        </div>
+    </div>
+
+    <!-- Maintenance Request Modal -->
+    <div id="maintenance-modal"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+        <div
+            class="w-full max-w-md bg-white dark:bg-background-dark rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-[#111418] dark:text-white">Demande d'intervention</h3>
+                <button id="close-maintenance-modal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <form id="maintenance-form" class="p-6 space-y-4">
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Description du problème</label>
+                    <textarea id="maintenance-content" required rows="4"
+                        class="w-full rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-primary focus:border-primary px-4 py-3 placeholder:text-gray-400"
+                        placeholder="Ex: Fuite d'eau sous l'évier de la cuisine..."></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full h-12 bg-primary text-white font-bold rounded-xl shadow-md hover:bg-primary/90 transition-all active:scale-95">
+                    Envoyer la demande
+                </button>
+            </form>
         </div>
     </div>
 </main>
