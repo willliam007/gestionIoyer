@@ -17,70 +17,78 @@
 </header>
 
 <main class="flex-1 pb-20">
-    <!-- Section Ajout (Cachée par défaut) -->
-    <div id="add-property-form-container" class="hidden animate-in slide-in-from-top duration-300">
-        <div class="px-4 pt-5 pb-2">
-            <h2 class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Ajouter une
-                Propriété</h2>
+    <!-- Modal Ajout de Bien -->
+    <div id="property-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="close-property-modal-overlay"></div>
+        <div
+            class="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
+                <h2 class="text-xl font-bold text-slate-800 dark:text-white">Nouvelle Propriété</h2>
+                <button id="close-property-modal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="add-property-form" class="p-6 space-y-4">
+                <div class="space-y-4 max-h-[60vh] overflow-y-auto px-1">
+                    <div class="flex flex-col">
+                        <label class="text-xs font-bold text-gray-500 uppercase mb-1 ml-1" for="street">Adresse</label>
+                        <input
+                            class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                            id="street" placeholder="Ex: 123 Rue de Paris" type="text" required />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 ml-1"
+                                for="postal-code">CP</label>
+                            <input
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                id="postal-code" placeholder="75001" type="text" required />
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 ml-1" for="city">Ville</label>
+                            <input
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                id="city" placeholder="Paris" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 ml-1" for="prix">Loyer
+                                (fcfa)</label>
+                            <input
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                id="prix" type="number" required />
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 ml-1"
+                                for="superficie">m²</label>
+                            <input
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                id="superficie" type="number" required />
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-xs font-bold text-gray-500 uppercase mb-1 ml-1"
+                                for="pieces">Pièces</label>
+                            <input
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                id="pieces" type="number" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <p id="property-error" class="hidden text-sm text-red-500 bg-red-50 p-3 rounded-xl mb-4"></p>
+                    <p id="property-success" class="hidden text-sm text-green-500 bg-green-50 p-3 rounded-xl mb-4"></p>
+                    <button type="submit"
+                        class="w-full h-12 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-[0.98]">
+                        Enregistrer la propriété
+                    </button>
+                </div>
+            </form>
         </div>
-
-        <div class="flex flex-col gap-2 p-4">
-            <!-- Section 1: Adresse -->
-            <div class="flex flex-col">
-                <label class="text-[#111418] dark:text-white text-sm font-medium leading-normal pb-2" for="street">Rue
-                    et numéro</label>
-                <input
-                    class="form-input flex w-full min-w-0 flex-1 rounded-lg text-[#111418] dark:text-white border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-12 p-4 text-base"
-                    id="street" placeholder="Ex: 123 Rue de Paris" type="text" />
-            </div>
-
-            <div class="flex flex-wrap items-end gap-4 pt-3">
-                <div class="flex flex-col min-w-24 flex-1">
-                    <label class="text-[#111418] dark:text-white text-sm font-medium pb-2" for="postal-code">Code
-                        postal</label>
-                    <input
-                        class="form-input w-full rounded-lg text-[#111418] dark:text-white border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-12 p-4"
-                        id="postal-code" placeholder="75001" type="text" />
-                </div>
-                <div class="flex flex-col min-w-40 flex-1">
-                    <label class="text-[#111418] dark:text-white text-sm font-medium pb-2" for="city">Ville</label>
-                    <input
-                        class="form-input w-full rounded-lg text-[#111418] dark:text-white border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-12 p-4"
-                        id="city" placeholder="Paris" type="text" />
-                </div>
-            </div>
-
-            <div class="flex flex-wrap items-end gap-4 pt-3">
-                <div class="flex flex-col min-w-24 flex-1">
-                    <label class="text-[#111418] dark:text-white text-sm font-medium pb-2" for="prix">Loyer (€)</label>
-                    <input
-                        class="form-input w-full rounded-lg text-[#111418] dark:text-white border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-12 p-4"
-                        id="prix" type="number" />
-                </div>
-                <div class="flex flex-col min-w-24 flex-1">
-                    <label class="text-[#111418] dark:text-white text-sm font-medium pb-2" for="superficie">Surface
-                        (m²)</label>
-                    <input
-                        class="form-input w-full rounded-lg text-[#111418] dark:text-white border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-12 p-4"
-                        id="superficie" type="number" />
-                </div>
-                <div class="flex flex-col min-w-24 flex-1">
-                    <label class="text-[#111418] dark:text-white text-sm font-medium pb-2" for="pieces">Pièces</label>
-                    <input
-                        class="form-input w-full rounded-lg text-[#111418] dark:text-white border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark h-12 p-4"
-                        id="pieces" type="number" />
-                </div>
-            </div>
-
-            <div class="pt-4">
-                <p id="add-error" class="text-red-500 text-sm mb-2 hidden"></p>
-                <p id="add-success" class="text-green-500 text-sm mb-2 hidden"></p>
-                <button id="add-property-btn"
-                    class="w-full h-12 bg-primary text-white font-bold rounded-xl shadow-md">Enregistrer la
-                    propriété</button>
-            </div>
-        </div>
-        <hr class="border-gray-100 dark:border-gray-800 my-4">
     </div>
 
     <!-- Liste des Biens -->

@@ -1,141 +1,164 @@
 <!DOCTYPE html>
 
-<html class="light" lang="fr"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Détails du Contrat</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-            },
-            fontFamily: {
-              "display": ["Manrope", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+<html class="light" lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Détails du Contrat</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
           },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
         },
-      }
-    </script>
-<style>
-      .material-symbols-outlined {
-        font-variation-settings:
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
         'FILL' 0,
         'wght' 400,
         'GRAD' 0,
         'opsz' 24
-      }
-    </style>
-<style>
+    }
+  </style>
+  <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
+
 <body class="font-display bg-background-light dark:bg-background-dark">
-<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-<!-- Top App Bar -->
-<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
-<div class="flex size-12 shrink-0 items-center text-slate-800 dark:text-slate-200">
-<span class="material-symbols-outlined">arrow_back_ios_new</span>
-</div>
-<h2 class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-800 dark:text-slate-200 pr-12">Détails du Contrat</h2>
-</div>
-<div class="p-4 space-y-4">
-<!-- Header Card -->
-<div class="flex items-stretch justify-between gap-4 rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
-<div class="flex flex-col gap-1 flex-[2_2_0px]">
-<p class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">Appartement - 2 pièces</p>
-<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">123 Rue de la République, 75001 Paris</p>
-</div>
-<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg flex-1" data-alt="Stylized map showing a location pin" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAjrhJP_m8yhaWWToZDR8uRCLF1_skUG89EpaQeJ8RpVL4uX7iZhO_2QpKnafu0nHMEdw9VsMf-CgT5_5Liff4Se7hgYiqL1Zyco2ClwbLRRq2CoYdn_8yf6B9qPkrtG9P3Ky3qEB7cFtxFGZqnpTS0aNLo0mQTcupndqGahFmJ3mEdYiJa1IEH5Fdbkv46036cg5bLDFSCiMk_ZAtUER8hN_WFwo3lcaellxdf-9dUUaDce4IV6P35Qg7jLdAa_lkjKLHARnOGW4");'></div>
-</div>
-<!-- Key Information Section -->
-<div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
-<div class="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 items-center">
-<span class="material-symbols-outlined text-primary">payments</span>
-<h2 class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">950,00 € / mois</h2>
-</div>
-<div class="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 items-center">
-<span class="material-symbols-outlined text-primary">calendar_month</span>
-<h2 class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">1er Juillet 2024</h2>
-</div>
-<div class="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 items-center">
-<span class="material-symbols-outlined text-green-500">check_circle</span>
-<h2 class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">Actif</h2>
-</div>
-</div>
-<!-- Dates & Durée Section -->
-<div class="rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
-<h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] pb-2">Dates &amp; Durée</h3>
-<div class="grid grid-cols-[auto_1fr] gap-x-6">
-<div class="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-4">
-<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Début du bail</p>
-<p class="text-slate-800 dark:text-slate-100 text-sm font-normal leading-normal text-right">01/09/2023</p>
-</div>
-<div class="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-4">
-<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Fin du bail</p>
-<p class="text-slate-800 dark:text-slate-100 text-sm font-normal leading-normal text-right">31/08/2026</p>
-</div>
-<div class="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-4">
-<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Durée restante</p>
-<p class="text-slate-800 dark:text-slate-100 text-sm font-normal leading-normal text-right">2 ans et 2 mois</p>
-</div>
-</div>
-</div>
-<!-- Participants Section -->
-<div class="rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
-<h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] pb-2">Participants</h3>
-<div class="grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-700">
-<div class="flex items-center justify-between py-4">
-<div>
-<p class="text-slate-500 dark:text-slate-400 text-sm">Propriétaire</p>
-<p class="text-slate-800 dark:text-slate-100 font-semibold">Jean Dupont</p>
-</div>
-<span class="material-symbols-outlined text-slate-400">chevron_right</span>
-</div>
-<div class="flex items-center justify-between py-4">
-<div>
-<p class="text-slate-500 dark:text-slate-400 text-sm">Locataire</p>
-<p class="text-slate-800 dark:text-slate-100 font-semibold">Marie Dubois</p>
-</div>
-<span class="material-symbols-outlined text-slate-400">chevron_right</span>
-</div>
-</div>
-</div>
-<!-- Documents Section -->
-<div class="rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
-<h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] pb-2">Documents</h3>
-<div class="grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-700">
-<div class="flex items-center gap-4 py-4">
-<span class="material-symbols-outlined text-primary text-2xl">description</span>
-<p class="flex-1 text-slate-800 dark:text-slate-100 text-sm font-medium">Bail de location.pdf</p>
-<button class="text-primary text-sm font-bold">Voir</button>
-</div>
-<div class="flex items-center gap-4 py-4">
-<span class="material-symbols-outlined text-primary text-2xl">description</span>
-<p class="flex-1 text-slate-800 dark:text-slate-100 text-sm font-medium">État des lieux d'entrée.pdf</p>
-<button class="text-primary text-sm font-bold">Voir</button>
-</div>
-</div>
-</div>
-</div>
-<!-- CTA Button -->
-<div class="p-4 mt-auto sticky bottom-0 bg-background-light dark:bg-background-dark">
-<button class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50">
-            Télécharger le résumé
-        </button>
-</div>
-</div>
-</body></html>
+  <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <!-- Top App Bar -->
+    <div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10">
+      <div class="flex size-12 shrink-0 items-center text-slate-800 dark:text-slate-200">
+        <span class="material-symbols-outlined">arrow_back_ios_new</span>
+      </div>
+      <h2
+        class="flex-1 text-center text-lg font-bold leading-tight tracking-[-0.015em] text-slate-800 dark:text-slate-200 pr-12">
+        Détails du Contrat</h2>
+    </div>
+    <div class="p-4 space-y-4">
+      <!-- Header Card -->
+      <div class="flex items-stretch justify-between gap-4 rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
+        <div class="flex flex-col gap-1 flex-[2_2_0px]">
+          <p class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">Appartement - 2 pièces</p>
+          <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">123 Rue de la République,
+            75001 Paris</p>
+        </div>
+        <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg flex-1"
+          data-alt="Stylized map showing a location pin"
+          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAjrhJP_m8yhaWWToZDR8uRCLF1_skUG89EpaQeJ8RpVL4uX7iZhO_2QpKnafu0nHMEdw9VsMf-CgT5_5Liff4Se7hgYiqL1Zyco2ClwbLRRq2CoYdn_8yf6B9qPkrtG9P3Ky3qEB7cFtxFGZqnpTS0aNLo0mQTcupndqGahFmJ3mEdYiJa1IEH5Fdbkv46036cg5bLDFSCiMk_ZAtUER8hN_WFwo3lcaellxdf-9dUUaDce4IV6P35Qg7jLdAa_lkjKLHARnOGW4");'>
+        </div>
+      </div>
+      <!-- Key Information Section -->
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+        <div
+          class="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 items-center">
+          <span class="material-symbols-outlined text-primary">payments</span>
+          <h2 class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">950,00 fcfa / mois</h2>
+        </div>
+        <div
+          class="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 items-center">
+          <span class="material-symbols-outlined text-primary">calendar_month</span>
+          <h2 class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">1er Juillet 2024</h2>
+        </div>
+        <div
+          class="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 items-center">
+          <span class="material-symbols-outlined text-green-500">check_circle</span>
+          <h2 class="text-slate-800 dark:text-slate-100 text-base font-bold leading-tight">Actif</h2>
+        </div>
+      </div>
+      <!-- Dates & Durée Section -->
+      <div class="rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
+        <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] pb-2">Dates
+          &amp; Durée</h3>
+        <div class="grid grid-cols-[auto_1fr] gap-x-6">
+          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Début du bail</p>
+            <p class="text-slate-800 dark:text-slate-100 text-sm font-normal leading-normal text-right">01/09/2023</p>
+          </div>
+          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Fin du bail</p>
+            <p class="text-slate-800 dark:text-slate-100 text-sm font-normal leading-normal text-right">31/08/2026</p>
+          </div>
+          <div class="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Durée restante</p>
+            <p class="text-slate-800 dark:text-slate-100 text-sm font-normal leading-normal text-right">2 ans et 2 mois
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Participants Section -->
+      <div class="rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
+        <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] pb-2">
+          Participants</h3>
+        <div class="grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-700">
+          <div class="flex items-center justify-between py-4">
+            <div>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">Propriétaire</p>
+              <p class="text-slate-800 dark:text-slate-100 font-semibold">Jean Dupont</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-400">chevron_right</span>
+          </div>
+          <div class="flex items-center justify-between py-4">
+            <div>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">Locataire</p>
+              <p class="text-slate-800 dark:text-slate-100 font-semibold">Marie Dubois</p>
+            </div>
+            <span class="material-symbols-outlined text-slate-400">chevron_right</span>
+          </div>
+        </div>
+      </div>
+      <!-- Documents Section -->
+      <div class="rounded-xl bg-white dark:bg-slate-800 p-4 shadow-sm">
+        <h3 class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] pb-2">
+          Documents</h3>
+        <div class="grid grid-cols-1 divide-y divide-slate-200 dark:divide-slate-700">
+          <div class="flex items-center gap-4 py-4">
+            <span class="material-symbols-outlined text-primary text-2xl">description</span>
+            <p class="flex-1 text-slate-800 dark:text-slate-100 text-sm font-medium">Bail de location.pdf</p>
+            <button class="text-primary text-sm font-bold">Voir</button>
+          </div>
+          <div class="flex items-center gap-4 py-4">
+            <span class="material-symbols-outlined text-primary text-2xl">description</span>
+            <p class="flex-1 text-slate-800 dark:text-slate-100 text-sm font-medium">État des lieux d'entrée.pdf</p>
+            <button class="text-primary text-sm font-bold">Voir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CTA Button -->
+    <div class="p-4 mt-auto sticky bottom-0 bg-background-light dark:bg-background-dark">
+      <button
+        class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/50">
+        Télécharger le résumé
+      </button>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -332,7 +332,7 @@ def manage_paiements():
         notif = Notification(
             user_id=contrat.proprietaire_id,
             titre='Paiement déclaré',
-            message=f'{tenant.username} a déclaré un paiement de {p.montant}€',
+            message=f'{tenant.username} a déclaré un paiement de {p.montant}fcfa',
             type='payment'
         )
         db.session.add(notif)
@@ -408,7 +408,7 @@ def update_paiement(id):
     notif = Notification(
         user_id=p.user_id,
         titre='Statut Paiement' if p.statut != 'paye' else 'Paiement Validé',
-        message=f'Votre paiement de {p.montant}€ a été mis à jour: {p.statut}',
+        message=f'Votre paiement de {p.montant}fcfa a été mis à jour: {p.statut}',
         type='payment'
     )
     db.session.add(notif)
@@ -456,7 +456,7 @@ def generate_quittance(id):
             <p><strong>Date :</strong> {{ date }}</p>
             <p><strong>Locataire :</strong> {{ tenant }}</p>
             <p><strong>Propriété :</strong> {{ propriete }}</p>
-            <p><strong>Montant :</strong> {{ montant }} €</p>
+            <p><strong>Montant :</strong> {{ montant }} fcfa</p>
             <p><strong>Statut :</strong> PAYÉ</p>
             <hr>
             <p>Merci pour votre confiance.</p>
@@ -663,7 +663,7 @@ def check_upcoming_rents_and_notify():
             
             if not payment_exists:
                 # Add notification
-                msg = f"Votre loyer de {c.montant_loyer}€ pour {now.strftime('%B')} est attendu avant le 5 du mois."
+                msg = f"Votre loyer de {c.montant_loyer}fcfa pour {now.strftime('%B')} est attendu avant le 5 du mois."
                 notif = Notification(
                     user_id=c.locataire_id,
                     titre='Rappel de loyer',

@@ -16,11 +16,19 @@
 <div class="p-4 space-y-6 pb-24">
     <!-- Existing Contracts Section (PROMINENT) -->
     <div>
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center justify-between mb-2">
             <h3 class="text-xl font-bold text-slate-800 dark:text-white">Contrats Actifs</h3>
             <span class="text-xs text-primary font-bold px-2 py-1 bg-primary/10 rounded-full"
                 id="active-contracts-count">0</span>
         </div>
+
+        <!-- Bouton Global d'Assignation (Uniquement pour Propriétaire) -->
+        <button id="open-contract-modal"
+            class="hidden mb-6 bg-primary text-white px-4 py-3 rounded-xl font-bold w-full flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+            <span class="material-symbols-outlined">add_circle</span>
+            Assigner un locataire
+        </button>
+
         <div id="contrats-list" class="flex flex-col gap-4">
             <p class="text-sm text-gray-400 italic">Chargement des locataires...</p>
         </div>
@@ -28,82 +36,85 @@
 
     <hr class="border-gray-100 dark:border-gray-800">
 
-    <!-- Owner-only Action: Add New Contract -->
-    <div id="owner-contract-controls" class="hidden">
-        <button id="toggle-contract-form-btn"
-            class="w-full flex items-center justify-between p-4 bg-primary/5 dark:bg-primary/10 text-primary rounded-2xl border border-primary/20 mb-4 transition-all hover:bg-primary/10">
-            <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined">add_circle</span>
-                <span class="font-bold">Assigner un nouveau locataire</span>
-            </div>
-            <span class="material-symbols-outlined" id="contract-toggle-icon">expand_more</span>
-        </button>
-
-        <div id="contract-form-container" class="hidden space-y-6 animate-in fade-in slide-in-from-top-2 duration-300">
-            <!-- Quick Tenant Form -->
-            <div
-                class="bg-gray-50 dark:bg-gray-900/40 p-5 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-sm">
-                <h3 class="flex items-center gap-2 text-sm font-bold text-slate-800 dark:text-gray-100 mb-4">
-                    <span class="material-symbols-outlined text-primary text-xl">person_add</span>
-                    Création Rapide Locataire
-                </h3>
-                <form id="quick-tenant-form" class="space-y-3">
-                    <input type="text" id="quick-tenant-name" placeholder="Nom complet" required
-                        class="w-full rounded-xl border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm h-11 px-4">
-                    <input type="email" id="quick-tenant-email" placeholder="Email" required
-                        class="w-full rounded-xl border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm h-11 px-4">
-                    <button type="submit"
-                        class="w-full bg-slate-800 dark:bg-slate-700 text-white text-xs font-bold py-3 rounded-xl shadow-sm">Créer
-                        le compte</button>
-                </form>
+    <!-- Modal Assigner Locataire -->
+    <div id="contract-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="close-contract-modal-overlay"></div>
+        <div
+            class="relative w-full max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
+                <h2 class="text-xl font-bold text-slate-800 dark:text-white">Assigner un Locataire</h2>
+                <button id="close-contract-modal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
 
-            <!-- Contract Form -->
-            <div class="bg-white dark:bg-gray-900/20 p-5 border border-gray-100 dark:border-gray-800 rounded-2xl">
-                <p id="contract-error"
-                    class="hidden text-sm text-red-500 bg-red-100 dark:bg-red-900/30 p-3 rounded-lg mb-4"></p>
-                <p id="contract-success"
-                    class="hidden text-sm text-green-500 bg-green-100 dark:bg-green-900/30 p-3 rounded-lg mb-4"></p>
+            <div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
+                <!-- Quick Tenant Form -->
+                <div class="bg-primary/5 p-4 rounded-2xl border border-primary/10">
+                    <h3 class="flex items-center gap-2 text-sm font-bold text-primary mb-3">
+                        <span class="material-symbols-outlined text-lg">person_add</span>
+                        Création Rapide Locataire
+                    </h3>
+                    <form id="quick-tenant-form" class="space-y-3">
+                        <input type="text" id="quick-tenant-name" placeholder="Nom complet" required
+                            class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm h-11 px-4">
+                        <input type="email" id="quick-tenant-email" placeholder="Email" required
+                            class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm h-11 px-4">
+                        <button type="submit"
+                            class="w-full bg-slate-800 dark:bg-slate-700 text-white text-xs font-bold py-3 rounded-xl shadow-sm transition-all active:scale-95">Créer
+                            le compte</button>
+                    </form>
+                </div>
 
-                <form id="create-contract-form" class="flex flex-col gap-4">
-                    <label class="flex flex-col gap-1">
-                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Bien
-                            immobilier</span>
-                        <select id="propriete-select"
-                            class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4"
-                            required>
-                            <option value="" disabled selected>Sélectionnez un bien</option>
-                        </select>
-                    </label>
+                <hr class="border-gray-100 dark:border-gray-800">
 
-                    <label class="flex flex-col gap-1">
-                        <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Locataire</span>
-                        <select id="locataire-select"
-                            class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4"
-                            required>
-                            <option value="" disabled selected>Sélectionnez un locataire</option>
-                        </select>
-                    </label>
+                <!-- Contract Form -->
+                <div class="space-y-4">
+                    <p id="contract-error" class="hidden text-sm text-red-500 bg-red-50 p-3 rounded-xl"></p>
+                    <p id="contract-success" class="hidden text-sm text-green-500 bg-green-50 p-3 rounded-xl"></p>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <form id="create-contract-form" class="flex flex-col gap-4">
                         <label class="flex flex-col gap-1">
-                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Loyer (€)</span>
-                            <input id="rent-amount" type="number" step="0.01"
-                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4"
-                                required>
-                        </label>
-                        <label class="flex flex-col gap-1">
-                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Début</span>
-                            <input id="start-date" type="date"
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Bien
+                                immobilier</span>
+                            <select id="propriete-select"
                                 class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
                                 required>
+                                <option value="" disabled selected>Sélectionnez un bien</option>
+                            </select>
                         </label>
-                    </div>
 
-                    <button id="submit-contract-btn" type="submit"
-                        class="w-full mt-4 bg-primary text-white font-bold h-12 rounded-xl shadow-lg transition-transform active:scale-95">Valider
-                        l'Assignation</button>
-                </form>
+                        <label class="flex flex-col gap-1">
+                            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Locataire</span>
+                            <select id="locataire-select"
+                                class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                required>
+                                <option value="" disabled selected>Sélectionnez un locataire</option>
+                            </select>
+                        </label>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="flex flex-col gap-1">
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Loyer
+                                    (fcfa)</span>
+                                <input id="rent-amount" type="number" step="0.01"
+                                    class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-sm"
+                                    required>
+                            </label>
+                            <label class="flex flex-col gap-1">
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Début</span>
+                                <input id="start-date" type="date"
+                                    class="w-full rounded-xl border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 h-12 px-4 text-xs"
+                                    required>
+                            </label>
+                        </div>
+
+                        <button id="submit-contract-btn" type="submit"
+                            class="w-full mt-2 bg-primary text-white font-bold h-12 rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-[0.98]">
+                            Valider l'Assignation
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

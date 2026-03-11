@@ -165,12 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
             roleLabels.forEach(l => {
                 l.classList.remove('border-primary');
                 l.classList.add('border-gray-200', 'dark:border-gray-800');
-                const checkIcon = l.querySelector('.absolute');
-                if (checkIcon) checkIcon.remove();
+                const checkIcon = l.querySelector('.role-check-icon');
+                if (checkIcon) checkIcon.classList.add('hidden');
             });
             label.classList.remove('border-gray-200', 'dark:border-gray-800');
             label.classList.add('border-primary');
-            label.innerHTML += `<div class="absolute top-2 right-2"><span class="material-symbols-outlined text-primary text-xl">check_circle</span></div>`;
+            const myCheck = label.querySelector('.role-check-icon');
+            if (myCheck) myCheck.classList.remove('hidden');
         });
     });
 
@@ -187,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nameEl) nameEl.textContent = `Bonjour ${data.username} !`;
 
                     const incomeEl = document.getElementById('owner-income');
-                    if (incomeEl) incomeEl.textContent = `€${data.loyers_percevoir.toFixed(2)}`;
+                    if (incomeEl) incomeEl.textContent = `fcfa${data.loyers_percevoir.toFixed(2)}`;
 
                     const collectedEl = document.getElementById('owner-collected');
-                    if (collectedEl) collectedEl.textContent = `€${data.loyers_encaisses.toFixed(2)}`;
+                    if (collectedEl) collectedEl.textContent = `fcfa${data.loyers_encaisses.toFixed(2)}`;
 
                     const occupiedEl = document.getElementById('owner-occupied');
                     if (occupiedEl) occupiedEl.textContent = `${data.louees} / ${data.total_props}`;
@@ -228,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             </div>
                                         </div>
                                         <div class="shrink-0 text-right">
-                                            <p class="text-base font-semibold leading-normal text-primary">€${p.prix.toFixed(2)}</p>
+                                            <p class="text-base font-semibold leading-normal text-primary">fcfa${p.prix.toFixed(2)}</p>
                                             <p class="text-[10px] text-gray-400">Mensuel</p>
                                         </div>
                                     </div>
@@ -293,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (rentEl) {
                         if (data.has_contract) {
                             currentRentAmount = data.loyer || 0;
-                            rentEl.textContent = `€${currentRentAmount.toFixed(2)}`;
+                            rentEl.textContent = `fcfa${currentRentAmount.toFixed(2)}`;
 
                             // Update badge and button based on payment_status
                             const ps = data.payment_status;
@@ -413,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
 
-                    if (!confirm(`Simuler le paiement de €${currentRentAmount.toFixed(2)} ?`)) return;
+                    if (!confirm(`Simuler le paiement de fcfa${currentRentAmount.toFixed(2)} ?`)) return;
 
                     // 1. Fetch pending payments for this tenant
                     const res = await fetch('/api/paiements', {
@@ -493,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h3 class="font-semibold text-gray-900 dark:text-white">${p.adresse}</h3>
                             <div class="flex justify-between mt-2 text-sm text-gray-500 dark:text-gray-400">
                                 <span>${p.pieces || 0} pièces, ${p.superficie || 0} m²</span>
-                                <span class="font-bold text-primary">€${p.prix || 0}</span>
+                                <span class="font-bold text-primary">fcfa${p.prix || 0}</span>
                             </div>
                             <div class="flex gap-2 mt-3">
                                 <button onclick="editProperty(${p.id})" class="flex-1 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-lg border border-blue-100 dark:border-blue-800 transition">Éditer</button>
@@ -684,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="flex flex-col gap-2 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-[#111418] dark:text-white text-base font-bold leading-normal">€${p.montant.toFixed(2)}</p>
+                                        <p class="text-[#111418] dark:text-white text-base font-bold leading-normal">fcfa${p.montant.toFixed(2)}</p>
                                         <p class="text-[10px] text-gray-400 uppercase font-bold">${p.username || ''}</p>
                                     </div>
                                     <div class="flex items-center gap-2 rounded-full px-3 py-1 bg-${color}-100 dark:bg-${color}-900/50">
@@ -919,240 +920,249 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- CONTRATS LOGIC ---
-    if (window.location.pathname === '/contrat' && token) {
-        const myRole = localStorage.getItem('user_role');
-        const ownerControls = document.getElementById('owner-contract-controls');
-        const backBtn = document.getElementById('contrat-back-btn');
-        const pageTitle = document.getElementById('contrat-page-title');
-
-        if (myRole === 'proprietaire') {
-            // Show the creation form for owners
-            if (ownerControls) ownerControls.classList.remove('hidden');
-            if (pageTitle) pageTitle.textContent = 'Nouveau Contrat';
-        } else {
-            // Tenant: read-only view, back to tenant dashboard
-            if (backBtn) backBtn.href = '/dashboard-locataire';
-            if (pageTitle) pageTitle.textContent = 'Mon Contrat';
+    // --- MODAL UTILITIES ---
+    const showModal = (id) => {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
+    };
+    const hideModal = (id) => {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    };
 
-        const propSelect = document.getElementById('propriete-select');
-        const locSelect = document.getElementById('locataire-select');
-        const contractList = document.getElementById('contrats-list');
-        const contractForm = document.getElementById('create-contract-form');
-        const errorEl = document.getElementById('contract-error');
-        const successEl = document.getElementById('contract-success');
+    // Close Modals on overlay click
+    ['property-modal', 'contract-modal'].forEach(id => {
+        const overlay = document.getElementById(`close-${id}-overlay`);
+        const closeBtn = document.getElementById(`close-${id}`);
+        if (overlay) overlay.addEventListener('click', () => hideModal(id));
+        if (closeBtn) closeBtn.addEventListener('click', () => hideModal(id));
+    });
 
-        // For owners: fetch properties & tenants
-        if (myRole === 'proprietaire') {
-            // 1. Fetch Properties
+    // --- PROPERTY MANAGEMENT (MODAL) ---
+    if (window.location.pathname === '/ajouter-propriete' && token) {
+        const openModalBtn = document.getElementById('toggle-add-form-btn');
+        if (openModalBtn) openModalBtn.addEventListener('click', () => showModal('property-modal'));
+
+        const propertyList = document.getElementById('properties-list');
+        const loadProperties = () => {
             fetch('/api/proprietes', { headers: { 'Authorization': `Bearer ${token}` } })
                 .then(res => res.json())
-                .then(props => {
-                    if (!propSelect) return;
-                    propSelect.innerHTML = '<option value="" disabled selected>Choisir un bien</option>';
-                    props.forEach(p => {
-                        const opt = document.createElement('option');
-                        opt.value = p.id;
-                        opt.textContent = p.adresse;
-                        propSelect.appendChild(opt);
-                    });
-                });
-
-            // 2. Fetch Tenants
-            fetch('/api/users/locataires', { headers: { 'Authorization': `Bearer ${token}` } })
-                .then(res => res.json())
-                .then(users => {
-                    const loadLocSelect = (uList) => {
-                        if (!locSelect) return;
-                        locSelect.innerHTML = '<option value="" disabled selected>Choisir un locataire</option>';
-                        uList.forEach(u => {
-                            const opt = document.createElement('option');
-                            opt.value = u.id;
-                            opt.textContent = u.username + ' (' + u.email + ')';
-                            locSelect.appendChild(opt);
-                        });
-                    };
-                    loadLocSelect(users);
-
-                    // Handle Quick Tenant Creation
-                    const quickForm = document.getElementById('quick-tenant-form');
-                    if (quickForm) {
-                        quickForm.addEventListener('submit', async (e) => {
-                            e.preventDefault();
-                            const name = document.getElementById('quick-tenant-name').value;
-                            const email = document.getElementById('quick-tenant-email').value;
-                            const btn = e.target.querySelector('button');
-                            btn.disabled = true;
-                            btn.textContent = "Création...";
-
-                            try {
-                                const res = await fetch('/api/register', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({
-                                        username: name, email: email,
-                                        password: 'password123', role: 'locataire'
-                                    })
-                                });
-                                const data = await res.json();
-                                if (res.ok) {
-                                    alert(`Locataire créé avec succès !\nMot de passe par défaut : password123`);
-                                    quickForm.reset();
-                                    // Reload the list
-                                    fetch('/api/users/locataires', { headers: { 'Authorization': `Bearer ${token}` } })
-                                        .then(r => r.json()).then(loadLocSelect);
-                                } else {
-                                    alert(data.message || "Erreur lors de la création.");
-                                }
-                            } catch (err) { console.error(err); }
-                            finally {
-                                btn.disabled = false;
-                                btn.textContent = "Créer & Ajouter à la liste";
-                            }
-                        });
-                    }
-                });
-
-            // 3. Load existing contracts
-            const loadContracts = () => {
-                fetch('/api/contrats', { headers: { 'Authorization': `Bearer ${token}` } })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (!contractList) return;
-                        contractList.innerHTML = '';
-                        if (data.length === 0) {
-                            contractList.innerHTML = '<p class="text-sm text-gray-500">Aucun contrat actif.</p>';
-                            return;
-                        }
-                        data.sort((a, b) => new Date(b.date_debut) - new Date(a.date_debut));
-                        data.forEach(c => {
-                            contractList.innerHTML += `
-                            <div class="flex flex-col gap-2 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="font-bold text-slate-800 dark:text-white">${c.propriete_adresse}</p>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400">Locataire: ${c.locataire_nom}</p>
-                                    </div>
-                                    <div class="px-2 py-1 rounded-full text-[10px] font-bold uppercase ${c.statut === 'actif' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}">
-                                        ${c.statut}
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center mt-2">
-                                    <p class="text-sm font-semibold text-primary">€${c.loyer}/mois</p>
-                                    <p class="text-xs text-slate-400">Du ${new Date(c.date_debut).toLocaleDateString()} au ${new Date(c.date_fin).toLocaleDateString()}</p>
-                                </div>
-                            </div>
-                        `;
-                        });
-                    });
-            };
-
-            loadContracts();
-
-            // 4. Handle form submission
-            if (contractForm) {
-                contractForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    errorEl.classList.add('hidden');
-                    successEl.classList.add('hidden');
-
-                    const propId = propSelect.value;
-                    const locId = locSelect.value;
-                    const rent = document.getElementById('rent-amount').value;
-                    const start = document.getElementById('start-date').value;
-                    const end = document.getElementById('end-date').value;
-
-                    if (!propId || !locId || !rent || !start || !end) {
-                        errorEl.textContent = "Tous les champs sont obligatoires.";
-                        errorEl.classList.remove('hidden');
+                .then(data => {
+                    const countEl = document.getElementById('prop-count');
+                    if (countEl) countEl.textContent = `${data.length} bien(s)`;
+                    if (!propertyList) return;
+                    propertyList.innerHTML = '';
+                    if (data.length === 0) {
+                        propertyList.innerHTML = '<p class="text-sm text-gray-500 italic text-center py-10">Aucune propriété ajoutée.</p>';
                         return;
                     }
+                    data.forEach(p => {
+                        const isAvailable = p.statut === 'disponible';
+                        const statusBadge = isAvailable
+                            ? '<span class="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">Disponible</span>'
+                            : '<span class="px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wider">Occupé</span>';
 
-                    try {
-                        const res = await fetch('/api/contrats', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify({
-                                propriete_id: parseInt(propId),
-                                locataire_id: parseInt(locId),
-                                montant_loyer: parseFloat(rent),
-                                date_debut: start,
-                                date_fin: end
-                            })
-                        });
-                        const data = await res.json();
-                        if (res.ok) {
-                            successEl.textContent = data.message;
-                            successEl.classList.remove('hidden');
-                            contractForm.reset();
-                            loadContracts();
-                        } else {
-                            errorEl.textContent = data.message;
-                            errorEl.classList.remove('hidden');
-                        }
-                    } catch (err) {
-                        errorEl.textContent = "Erreur réseau.";
-                        errorEl.classList.remove('hidden');
-                    }
+                        propertyList.innerHTML += `
+                            <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm transition-all hover:shadow-md">
+                                <div class="flex justify-between items-start mb-1">
+                                    <h4 class="font-bold text-slate-800 dark:text-gray-100">${p.adresse}</h4>
+                                    ${statusBadge}
+                                </div>
+                                <div class="text-sm"><span class="text-gray-400">Loyer:</span><span class="font-bold text-primary"> fcfa${p.prix.toFixed(2)}</span></div>
+                                <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-50 dark:border-gray-700/50">
+                                    <div class="flex gap-2">
+                                        <button onclick="deleteProperty(${p.id})" class="text-[10px] text-red-500 font-bold px-3 py-1 rounded-lg border border-red-50 hover:bg-red-50 transition-colors">Supprimer</button>
+                                        ${isAvailable ? `<a href="/contrat?prop_id=${p.id}" class="text-[10px] bg-primary/10 text-primary font-bold px-3 py-1 rounded-lg hover:bg-primary/20 transition-colors">Assigner</a>` : ''}
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
                 });
-            }
+        };
+
+        window.deleteProperty = async (id) => {
+            if (!confirm("Supprimer cette propriété ?")) return;
+            await fetch(`/api/proprietes/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+            loadProperties();
+        };
+
+        const addPropertyForm = document.getElementById('add-property-form');
+        if (addPropertyForm) {
+            addPropertyForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                const res = await fetch('/api/proprietes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({
+                        adresse: `${document.getElementById('street').value}, ${document.getElementById('postal-code').value} ${document.getElementById('city').value}`,
+                        prix: parseFloat(document.getElementById('prix').value),
+                        superficie: parseFloat(document.getElementById('superficie').value) || 0,
+                        nombre_pieces: parseInt(document.getElementById('pieces').value) || 0
+                    })
+                });
+                if (res.ok) {
+                    addPropertyForm.reset();
+                    loadProperties();
+                    hideModal('property-modal');
+                } else { alert("Erreur lors de l'ajout."); }
+                btn.disabled = false;
+            });
         }
+        loadProperties();
+    }
+
+    // --- CONTRACT MANAGEMENT (MODAL) ---
+    if (window.location.pathname === '/contrat' && token) {
+        const userRole = localStorage.getItem('user_role');
+        const openContractBtn = document.getElementById('open-contract-modal');
+        if (openContractBtn && userRole === 'proprietaire') {
+            openContractBtn.classList.remove('hidden');
+            openContractBtn.addEventListener('click', () => showModal('contract-modal'));
+        }
+
+        const loadContracts = () => {
+            fetch('/api/contrats', { headers: { 'Authorization': `Bearer ${token}` } })
+                .then(res => res.json())
+                .then(data => {
+                    const listEl = document.getElementById('contrats-list');
+                    if (!listEl) return;
+                    const countEl = document.getElementById('active-contracts-count');
+                    if (countEl) countEl.textContent = data.filter(c => c.statut === 'actif').length;
+                    listEl.innerHTML = '';
+                    data.forEach(c => {
+                        listEl.innerHTML += `
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-1">${c.locataire_nom}</h4>
+                            <p class="text-[10px] text-gray-400 uppercase font-bold mb-4">${c.propriete_adresse}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-primary font-bold text-sm">fcfa${c.loyer.toFixed(2)}</span>
+                                <button onclick="archiveContract(${c.id})" class="text-xs text-red-500 font-bold px-3 py-1.5 rounded-lg border border-red-50">Archiver</button>
+                            </div>
+                        </div>`;
+                    });
+                });
+        };
+
+        window.archiveContract = async (id) => {
+            if (confirm("Archiver ce contrat ?")) {
+                await fetch(`/api/contrats/${id}/archive`, { method: 'PATCH', headers: { 'Authorization': `Bearer ${token}` } });
+                loadContracts();
+            }
+        };
+
+        const loadSelects = async () => {
+            const propSelect = document.getElementById('propriete-select');
+            const locSelect = document.getElementById('locataire-select');
+            if (!propSelect || !locSelect) return;
+
+            const [pRes, lRes] = await Promise.all([
+                fetch('/api/proprietes', { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch('/api/users/locataires', { headers: { 'Authorization': `Bearer ${token}` } })
+            ]);
+            const [props, locs] = await Promise.all([pRes.json(), lRes.json()]);
+
+            propSelect.innerHTML = '<option value="" disabled selected>Sélectionnez un bien</option>';
+            props.filter(p => p.statut === 'disponible').forEach(p => {
+                propSelect.innerHTML += `<option value="${p.id}" data-rent="${p.prix}">${p.adresse}</option>`;
+            });
+
+            locSelect.innerHTML = '<option value="" disabled selected>Sélectionnez un locataire</option>';
+            locs.forEach(l => {
+                locSelect.innerHTML += `<option value="${l.id}">${l.username}</option>`;
+            });
+
+            propSelect.addEventListener('change', (e) => {
+                const selected = e.target.options[e.target.selectedIndex];
+                const rentInput = document.getElementById('rent-amount');
+                if (rentInput) rentInput.value = selected.dataset.rent;
+            });
+
+            // Handle URL Parameters (Auto-select and Open Modal)
+            const urlParams = new URLSearchParams(window.location.search);
+            const assignPropId = urlParams.get('prop_id');
+            if (assignPropId) {
+                propSelect.value = assignPropId;
+                // Trigger the change event to update the rent input
+                propSelect.dispatchEvent(new Event('change'));
+                showModal('contract-modal');
+            }
+        };
+
+        const contractForm = document.getElementById('create-contract-form');
+        if (contractForm) {
+            contractForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const res = await fetch('/api/contrats', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({
+                        propriete_id: document.getElementById('propriete-select').value,
+                        locataire_id: document.getElementById('locataire-select').value,
+                        montant_loyer: parseFloat(document.getElementById('rent-amount').value),
+                        date_debut: document.getElementById('start-date').value,
+                        date_fin: "2099-01-01"
+                    })
+                });
+                if (res.ok) { contractForm.reset(); loadContracts(); hideModal('contract-modal'); }
+            });
+        }
+
+        const quickTenantForm = document.getElementById('quick-tenant-form');
+        if (quickTenantForm) {
+            quickTenantForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('quick-tenant-name').value;
+                const email = document.getElementById('quick-tenant-email').value;
+                try {
+                    const res = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username: name, email: email, password: 'password123', role: 'locataire' })
+                    });
+                    if (res.ok) {
+                        alert(`Locataire créé avec succès ! Le mot de passe par défaut est 'password123'.`);
+                        quickTenantForm.reset();
+                        loadSelects();
+                    } else { alert("Erreur lors de la création."); }
+                } catch (err) { console.error(err); }
+            });
+        }
+        loadContracts();
+        loadSelects();
     }
 
     // --- NOTIFICATIONS PAGE ---
     if (window.location.pathname === '/notifications' && token) {
+        const listEl = document.getElementById('notifications-list');
         const loadNotifications = () => {
             fetch('/api/notifications', { headers: { 'Authorization': `Bearer ${token}` } })
                 .then(res => res.json())
                 .then(data => {
-                    const listEl = document.getElementById('notifications-list');
                     if (!listEl) return;
                     listEl.innerHTML = '';
-
-                    if (data.length === 0) {
-                        listEl.innerHTML = `
-                            <div class="flex flex-col items-center justify-center text-center p-8 mt-12">
-                                <div class="flex items-center justify-center size-20 bg-gray-100 dark:bg-gray-800 rounded-full mb-4">
-                                    <span class="material-symbols-outlined text-3xl text-gray-400">notifications_off</span>
-                                </div>
-                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200">Aucune notification</h3>
-                                <p class="text-sm text-gray-500">Revenez plus tard pour voir vos alertes.</p>
-                            </div>
-                        `;
-                        return;
-                    }
-
                     data.forEach(n => {
-                        const isUnread = !n.lu;
                         listEl.innerHTML += `
-                            <div class="flex items-center gap-4 bg-white dark:bg-gray-900/50 px-4 min-h-[72px] py-4 border-b border-gray-50 dark:border-gray-800">
+                            <div class="flex items-start gap-4 bg-white dark:bg-gray-900/50 p-4 border-b border-gray-50 dark:border-gray-800">
                                 <div class="flex size-10 shrink-0 items-center justify-center rounded-full ${n.type === 'chat' ? 'bg-blue-100 text-blue-600' : 'bg-primary/10 text-primary'}">
-                                    <span class="material-symbols-outlined text-xl">${n.type === 'chat' ? 'chat' : 'notifications'}</span>
+                                    <span class="material-symbols-outlined">${n.type === 'chat' ? 'chat' : 'notifications'}</span>
                                 </div>
-                                <div class="flex flex-col flex-1">
-                                    <div class="flex justify-between items-start">
-                                        <p class="text-sm font-bold text-slate-800 dark:text-gray-100">${n.titre}</p>
-                                        <p class="text-[10px] text-gray-400 font-medium">${new Date(n.date).toLocaleDateString('fr-FR')}</p>
-                                    </div>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${n.message}</p>
+                                <div class="flex-1">
+                                    <div class="flex justify-between"><p class="text-sm font-bold text-slate-800">${n.titre}</p><p class="text-[10px] text-gray-400">${new Date(n.date).toLocaleDateString()}</p></div>
+                                    <p class="text-xs text-gray-500 mt-1">${n.message}</p>
+                                    ${n.type === 'chat' ? `<a href="/messages" class="inline-block mt-3 px-4 py-1.5 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-lg border border-blue-100 transition-colors hover:bg-blue-100">RÉPONDRE</a>` : ''}
                                 </div>
-                                ${isUnread ? '<div class="size-2 rounded-full bg-primary shrink-0"></div>' : ''}
-                            </div>
-                        `;
+                                ${!n.lu ? '<div class="size-2 rounded-full bg-primary shrink-0 mt-2"></div>' : ''}
+                            </div>`;
                     });
-
-                    // Mark as read
-                    fetch('/api/notifications/mark-read', {
-                        method: 'PUT',
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    }).then(() => {
-                        const navNotif = document.getElementById('nav-notifications');
-                        if (navNotif) navNotif.classList.remove('text-red-500');
-                    });
+                    fetch('/api/notifications/mark-read', { method: 'PUT', headers: { 'Authorization': `Bearer ${token}` } });
                 });
         };
         loadNotifications();
