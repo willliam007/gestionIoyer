@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- NAVIGATION INITIALIZATION ---
     const bottomNav = document.getElementById('bottom-nav');
-    if (userRole && bottomNav) {
+    if (userRole && bottomNav && currentPath !== '/messages') {
         bottomNav.classList.remove('hidden');
         const navHome = document.getElementById('nav-home');
         const navBiens = document.getElementById('nav-biens');

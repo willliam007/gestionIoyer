@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "agentation-mcp": "^1.2.0"
+  },
+  "scripts": {
+    "agentation": "agentation-mcp server"
+  }
+}

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="light" lang="fr">
 
 <head>
@@ -64,8 +64,8 @@
 
     <!-- Bottom Navigation Bar (Hidden by default, shown by JS) -->
     <div id="bottom-nav"
-        class="hidden fixed bottom-0 left-0 right-0 z-40 border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="mx-auto flex h-16 max-w-md items-center justify-around px-2">
+        class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-2rem)] max-w-[400px] rounded-[2rem] border bg-white/70 dark:bg-[#101922]/70 backdrop-blur-2xl border-white/40 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <div class="flex h-[72px] w-full items-center justify-around px-2">
             <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="#"
                 id="nav-home">
                 <span class="material-symbols-outlined">dashboard</span>
@@ -97,11 +97,7 @@
                 <span class="text-xs font-medium text-center leading-none">Alertes</span>
             </a>
 
-            <a class="flex flex-col items-center justify-center gap-1 text-gray-500 dark:text-gray-400" href="#"
-                id="logout-btn">
-                <span class="material-symbols-outlined">logout</span>
-                <span class="text-xs font-medium text-center leading-none">Déco</span>
-            </a>
+            
         </div>
     </div>
 
@@ -130,7 +126,18 @@
             });
         })();
     </script>
+    <!-- Agentation Integration -->
+    <div id="agentation-root"></div>
+    <script type="module">
+        import React from 'https://esm.sh/react@18';
+        import { createRoot } from 'https://esm.sh/react-dom@18/client';
+        import { Agentation } from 'https://esm.sh/agentation?deps=react@18';
+
+        const container = document.getElementById('agentation-root');
+        if (container) {
+            const root = createRoot(container);
+            root.render(React.createElement(Agentation));
+        }
+    </script>
 </body>
-
 </html>
-

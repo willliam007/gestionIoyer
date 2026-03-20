@@ -23,11 +23,13 @@
         </div>
 
         <!-- Bouton Global d'Assignation (Uniquement pour Propriétaire) -->
-        <button id="open-contract-modal"
-            class="hidden mb-6 bg-primary text-white px-4 py-3 rounded-xl font-bold w-full flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
-            <span class="material-symbols-outlined">add_circle</span>
-            Assigner un locataire
-        </button>
+        <div class="flex justify-start sm:justify-end mb-6">
+            <button id="open-contract-modal"
+                class="hidden bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.98]">
+                <span class="material-symbols-outlined text-lg">person_add</span>
+                Assigner un locataire
+            </button>
+        </div>
 
         <div id="contrats-list" class="flex flex-col gap-4">
             <p class="text-sm text-gray-400 italic">Chargement des locataires...</p>
